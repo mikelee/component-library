@@ -15,7 +15,7 @@ const defaultColorTheme: Colors = {
     tertiary: '#4D6DEB'
 }
 
-const ColorThemeContext: React.Context<Colors> = createContext(defaultColorTheme);
+export const ColorThemeContext: React.Context<Colors> = createContext(defaultColorTheme);
 
 const ColorTheme: React.FC<Props> = ({ children, colors }) => (
     <ColorThemeContext.Provider value={colors}>
