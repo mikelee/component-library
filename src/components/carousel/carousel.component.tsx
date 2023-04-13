@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react';
 
 import './carousel.styles.scss';
+import { ReactComponent as ArrowIcon} from '../../assets/arrow_right.svg';
 
 interface Props {
     items: any[],
@@ -24,7 +25,11 @@ const Carousel: React.FC<Props> = ({ items, prev, next }) => {
                 aria-label='previous'
                 onClick={() => setCurrentIndex(currentIndex - 1)}
                 disabled={currentIndex <= 0}
-                >Previous</button>
+            >
+                <div className='icon-container reverse'>
+                    <ArrowIcon />
+                </div>
+            </button>
                 {
                     prev
                     ?
@@ -56,7 +61,11 @@ const Carousel: React.FC<Props> = ({ items, prev, next }) => {
                 aria-label='next'
                 onClick={() => setCurrentIndex(currentIndex + 1)}
                 disabled={currentIndex >= items.length - 1}
-            >Next</button>
+            >
+                <div className='icon-container'>
+                    <ArrowIcon />
+                </div>
+            </button>
         </section>
     );
 }
