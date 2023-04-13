@@ -8,4 +8,8 @@
     .item {
         margin: 0 16px;
     }
+
+    .item-prev, .item-next {
+        transform: scale(.7);
+    }
 }
