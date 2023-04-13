@@ -1,0 +1,11 @@
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+
+    .item {
+        margin: 0 16px;
+    }
+}
