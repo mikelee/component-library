@@ -21,6 +21,7 @@ const Carousel: React.FC<Props> = ({ items, prev, next }) => {
     return (
         <section className='carousel'>
             <button
+                aria-label='previous'
                 onClick={() => setCurrentIndex(currentIndex - 1)}
                 disabled={currentIndex <= 0}
                 >Previous</button>
@@ -52,6 +53,7 @@ const Carousel: React.FC<Props> = ({ items, prev, next }) => {
                 : null
             }
             <button
+                aria-label='next'
                 onClick={() => setCurrentIndex(currentIndex + 1)}
                 disabled={currentIndex >= items.length - 1}
             >Next</button>

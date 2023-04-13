@@ -29,7 +29,7 @@ describe('Carousel tests without prev and next items', () => {
         
         expect(firstItem).toBeInTheDocument();
         
-        const nextButton = screen.getByRole('button', { name: 'Next' });
+        const nextButton = screen.getByRole('button', { name: 'next' });
         await user.click(nextButton);
         
         const text2 = items[1].props.children;
@@ -42,7 +42,7 @@ describe('Carousel tests without prev and next items', () => {
     it('should change the current item to the previous item', async () => {
         const user = userEvent.setup();
 
-        const nextButton = screen.getByRole('button', { name: 'Next' });
+        const nextButton = screen.getByRole('button', { name: 'next' });
         await user.click(nextButton);
 
         const text2 = items[1].props.children;
@@ -50,7 +50,7 @@ describe('Carousel tests without prev and next items', () => {
 
         expect(secondItem).toBeInTheDocument();
         
-        const prevButton = screen.getByRole('button', { name: 'Previous' });
+        const prevButton = screen.getByRole('button', { name: 'previous' });
         await user.click(prevButton);
 
         const text1 = items[0].props.children;
@@ -62,7 +62,7 @@ describe('Carousel tests without prev and next items', () => {
     });
 
     it('should disable the previous button', () => {
-        const prevButton = screen.getByRole('button', { name: 'Previous' });
+        const prevButton = screen.getByRole('button', { name: 'previous' });
 
         expect(prevButton).toBeDisabled();
     });
@@ -70,7 +70,7 @@ describe('Carousel tests without prev and next items', () => {
     it('should disable the next button', async () => {
         const user = userEvent.setup();
 
-        const nextButton = screen.getByRole('button', { name: 'Next' });
+        const nextButton = screen.getByRole('button', { name: 'next' });
         const amountNextItems = items.length - 1;
         
         for (let i = 1; i <= amountNextItems; i++) {
@@ -90,7 +90,7 @@ describe('Carousel tests with prev and next items' , () => {
         const user = userEvent.setup();
 
         // initally there is no previous item, so the next button needs to be clicked
-        const nextButton = screen.getByRole('button', { name: 'Next' });
+        const nextButton = screen.getByRole('button', { name: 'next' });
         await user.click(nextButton);
 
         const text1 = items[0].props.children;
@@ -110,7 +110,7 @@ describe('Carousel tests with prev and next items' , () => {
         const user = userEvent.setup();
 
         // initally there is no previous item, so the next button needs to be clicked
-        const nextButton = screen.getByRole('button', { name: 'Next' });
+        const nextButton = screen.getByRole('button', { name: 'next' });
         await user.click(nextButton);
         
         const text1 = items[0].props.children;
@@ -134,11 +134,11 @@ describe('Carousel tests with prev and next items' , () => {
     it('should shift the displayed items one to the left (bring in the previous previous item and drop the next item)', async () => {
         const user = userEvent.setup();
 
-        const nextButton = screen.getByRole('button', { name: 'Next' });
+        const nextButton = screen.getByRole('button', { name: 'next' });
         await user.click(nextButton);
         await user.click(nextButton);
         
-        const prevButton = screen.getByRole('button', { name: 'Previous' });
+        const prevButton = screen.getByRole('button', { name: 'previous' });
         await user.click(prevButton);
         
         const text1 = items[0].props.children;
@@ -167,7 +167,7 @@ describe('Carousel tests with prev and next items' , () => {
     it('should display an empty placeholder for the next item', async () => {
         const user = userEvent.setup();
         
-        const nextButton = screen.getByRole('button', { name: 'Next' });
+        const nextButton = screen.getByRole('button', { name: 'next' });
         const amountNextItems = items.length - 1;
         
         for (let i = 1; i <= amountNextItems; i++) {
