@@ -3,10 +3,10 @@ import userEvent from '@testing-library/user-event';
 import Carousel from './carousel.component';
 
 const items: React.ReactElement[] = [
-    <div>Item One</div>,
-    <div>Item Two</div>,
-    <div>Item Three</div>,
-    <div>Item Four</div>
+    <div key={1}>Item One</div>,
+    <div key={2}>Item Two</div>,
+    <div key={3}>Item Three</div>,
+    <div key={4}>Item Four</div>,
 ];
 
 describe('Carousel tests', () => {
@@ -19,6 +19,46 @@ describe('Carousel tests', () => {
         
         const firstItem = screen.getByText(text);
         expect(firstItem).toBeInTheDocument();
+    });
+
+    it('should change the current item to the next item', async () => {
+        const user = userEvent.setup();
+
+        const text1 = items[0].props.children;
+        const firstItem = screen.getByText(text1);
+        
+        expect(firstItem).toBeInTheDocument();
+        
+        const nextButton = screen.getByRole('button', { name: 'Next' });
+        await user.click(nextButton);
+        
+        const text2 = items[1].props.children;
+        const secondItem = screen.getByText(text2);
+        
+        expect(firstItem).not.toBeInTheDocument();
+        expect(secondItem).toBeInTheDocument();
+    });
+    
+    it('should change the current item to the previous item', async () => {
+        const user = userEvent.setup();
+
+        const nextButton = screen.getByRole('button', { name: 'Next' });
+        await user.click(nextButton);
+
+        const text2 = items[1].props.children;
+        const secondItem = screen.getByText(text2);
+
+        expect(secondItem).toBeInTheDocument();
+        
+        const prevButton = screen.getByRole('button', { name: 'Previous' });
+        await user.click(prevButton);
+
+        const text1 = items[0].props.children;
+        const firstItem = screen.getByText(text1);
+        
+        expect(firstItem).toBeInTheDocument();
+        expect(secondItem).not.toBeInTheDocument();
+        
     });
 
     it('should disable the previous button', () => {
