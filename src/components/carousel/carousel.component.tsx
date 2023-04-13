@@ -1,15 +1,19 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useContext, useLayoutEffect, useState } from 'react';
+import { ColorThemeContext } from '../color-theme/color-theme.component';
 
 import './carousel.styles.scss';
 import { ReactComponent as ArrowIcon} from '../../assets/arrow_right.svg';
 
 interface Props {
     items: any[],
-    prev?: boolean
+    color?: string,
+    prev?: boolean,
     next?: boolean
 }
 
-const Carousel: React.FC<Props> = ({ items, prev, next }) => {
+const Carousel: React.FC<Props> = ({ items, color, prev, next }) => {
+    const colorTheme = useContext(ColorThemeContext);
+
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemWidth, setItemWidth] = useState(0);
 
@@ -25,6 +29,7 @@ const Carousel: React.FC<Props> = ({ items, prev, next }) => {
                 aria-label='previous'
                 onClick={() => setCurrentIndex(currentIndex - 1)}
                 disabled={currentIndex <= 0}
+                style={color ? { backgroundColor: colorTheme[color] } : undefined}
             >
                 <div className='icon-container reverse'>
                     <ArrowIcon />
@@ -61,6 +66,7 @@ const Carousel: React.FC<Props> = ({ items, prev, next }) => {
                 aria-label='next'
                 onClick={() => setCurrentIndex(currentIndex + 1)}
                 disabled={currentIndex >= items.length - 1}
+                style={color ? { backgroundColor: colorTheme[color] } : undefined}
             >
                 <div className='icon-container'>
                     <ArrowIcon />
