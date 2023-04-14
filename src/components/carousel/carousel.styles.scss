@@ -14,12 +14,23 @@
     }
 
     button {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+        border-radius: 8px;
+        border: none;
         
-        &:disabled path {
-            stroke: #5f5f5f;
+        &:disabled::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(black, .35);
+            border-radius: 8px;
+            z-index: 999;
         }
     }
     
