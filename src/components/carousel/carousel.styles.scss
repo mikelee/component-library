@@ -20,6 +20,8 @@
         align-items: center;
         border-radius: 8px;
         border: none;
+        box-shadow: 0 12px 12px rgba(black, .2);
+        transition: all .3s;
         
         &:disabled::after {
             content: '';
@@ -31,6 +33,16 @@
             background-color: rgba(black, .35);
             border-radius: 8px;
             z-index: 999;
+        }
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 20px rgba(black, .2);
+        }
+        
+        &:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 4px rgba(black, .2);
         }
     }
     
