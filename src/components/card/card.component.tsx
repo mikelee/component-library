@@ -20,9 +20,12 @@ const Card: React.FC<Props> = ({ frontTitle, frontText, backTitle, backText, col
             <div
                 className='side front'
                 style={
-                    colorFront
+                    colorFront && colorTheme[colorFront]
                     ? { backgroundColor: colorTheme[colorFront]}
-                    : undefined
+                    :
+                        colorFront
+                        ? { backgroundColor: colorFront}
+                        : undefined
                 }
                 data-testid='card-front'
             >
@@ -48,9 +51,12 @@ const Card: React.FC<Props> = ({ frontTitle, frontText, backTitle, backText, col
             <div
                 className='side back'
                 style={
-                    colorBack
+                    colorBack && colorTheme[colorBack]
                     ? { backgroundColor: colorTheme[colorBack]}
-                    : undefined
+                    :
+                        colorBack
+                        ? { backgroundColor: colorBack}
+                        : undefined
                 }
                 data-testid='card-back'
             >
