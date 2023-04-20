@@ -1,4 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
+import { Flipped, Flipper  } from 'react-flip-toolkit';
 
 interface Props {
     items: any[],
@@ -17,35 +18,54 @@ const MultipleItems: React.FC<Props> = ({ items, currentIndex, prev, next }) => 
     }, [items]);
 
     return (
-        <>
-            {
-                prev
-                ?
-                    <div className='item item-prev'>
-                        {
-                            currentIndex - 1 >= 0
-                            ? items[currentIndex - 1]
-                            : <div style={{ width: itemWidth }} data-testid='prev-placeholder'></div>
-                        }
+        <Flipper flipKey={currentIndex}>
+            <div className='item-group'>
+                {
+                    prev
+                    ?
+                        <Flipped
+                            key={currentIndex - 1}
+                            flipId={currentIndex - 1}
+                            transformOrigin='50% 50%'
+                        >
+                            <div className='item item-prev'>
+                                {
+                                    currentIndex - 1 >= 0
+                                    ? items[currentIndex - 1]
+                                    : <div style={{ width: itemWidth }} data-testid='prev-placeholder'></div>
+                                }
+                            </div>
+                        </Flipped>
+                    : null
+                }
+                <Flipped
+                    key={currentIndex}
+                    flipId={currentIndex}
+                >
+                    <div id='item-cur' className='item'>
+                        {items[currentIndex]}
                     </div>
-                : null
-            }
-            <div id='item-cur' className='item'>
-                {items[currentIndex]}
+                </Flipped>
+                {
+                    next
+                    ?
+                        <Flipped
+                            key={currentIndex + 1}
+                            flipId={currentIndex + 1}
+                            transformOrigin='50% 50%'
+                        >
+                            <div className='item item-next'>
+                                {
+                                    currentIndex + 1 <= items.length - 1
+                                    ? items[currentIndex + 1]
+                                    : <div style={{ width: itemWidth }} data-testid='next-placeholder'></div>
+                                }
+                            </div>
+                        </Flipped>
+                    : null
+                }
             </div>
-            {
-                next
-                ?
-                    <div className='item item-next'>
-                        {
-                            currentIndex + 1 <= items.length - 1
-                            ? items[currentIndex + 1]
-                            : <div style={{ width: itemWidth }} data-testid='next-placeholder'></div>
-                        }
-                    </div>
-                : null
-            }
-        </>
+        </Flipper>
     );
 };
 

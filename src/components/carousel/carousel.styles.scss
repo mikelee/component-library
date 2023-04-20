@@ -9,8 +9,12 @@
         margin: 0 16px;
     }
 
-    .item-prev, .item-next {
-        transform: scale(.7);
+    .item-group {
+        display: flex;
+        
+        .item-prev, .item-next {
+            transform: scale(.7);
+        }
     }
 
     button {
