@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
-import { Flipped, Flipper  } from 'react-flip-toolkit';
+import { Flipped, Flipper, spring } from 'react-flip-toolkit';
 
 interface Props {
     items: any[],
@@ -17,6 +17,13 @@ const MultipleItems: React.FC<Props> = ({ items, currentIndex, prev, next }) => 
         if (width) setItemWidth(width);
     }, [items]);
 
+    const onElementAppear = (el: any) => spring({
+        onUpdate: val => {
+            el.style.opacity = val
+        },
+        delay: 100
+    });
+
     return (
         <Flipper flipKey={currentIndex}>
             <div className='item-group'>
@@ -27,6 +34,7 @@ const MultipleItems: React.FC<Props> = ({ items, currentIndex, prev, next }) => 
                             key={currentIndex - 1}
                             flipId={currentIndex - 1}
                             transformOrigin='50% 50%'
+                            onAppear={onElementAppear}
                         >
                             <div className='item item-prev'>
                                 {
@@ -53,6 +61,7 @@ const MultipleItems: React.FC<Props> = ({ items, currentIndex, prev, next }) => 
                             key={currentIndex + 1}
                             flipId={currentIndex + 1}
                             transformOrigin='50% 50%'
+                            onAppear={onElementAppear}
                         >
                             <div className='item item-next'>
                                 {
