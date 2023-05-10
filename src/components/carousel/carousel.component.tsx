@@ -11,19 +11,30 @@ interface Props {
     items: any[],
     color?: string,
     prev?: boolean,
-    next?: boolean
+    next?: boolean,
+    itemPadding?: number
 }
 
-const Carousel: React.FC<Props> = ({ items, color, prev, next }) => {
+const Carousel: React.FC<Props> = ({ items, color, prev, next, itemPadding }) => {
     const colorTheme = useContext(ColorThemeContext);
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [direction, setDirection ] = useState<'left' | 'right'>('right');
+
+    const clickPrev = () => {
+        if (direction !== 'left') setDirection('left');
+        setCurrentIndex(currentIndex - 1)
+    }
+    const clickNext = () => {
+        if (direction !== 'right') setDirection('right');
+        setCurrentIndex(currentIndex + 1)
+    }
 
     return (
         <section className='carousel'>
             <button
                 aria-label='previous'
-                onClick={() => setCurrentIndex(currentIndex - 1)}
+                onClick={clickPrev}
                 disabled={currentIndex <= 0}
                 style={color ? { backgroundColor: colorTheme[color] } : undefined}
             >
@@ -34,11 +45,11 @@ const Carousel: React.FC<Props> = ({ items, color, prev, next }) => {
             {
                 prev || next
                 ? <MultipleItems items={items} currentIndex={currentIndex} prev={prev} next={next} />
-                : <OneItem items={items} currentIndex={currentIndex} />
+                : <OneItem items={items} currentIndex={currentIndex} direction={direction} itemPadding={itemPadding} />
             }
             <button
                 aria-label='next'
-                onClick={() => setCurrentIndex(currentIndex + 1)}
+                onClick={clickNext}
                 disabled={currentIndex >= items.length - 1}
                 style={color ? { backgroundColor: colorTheme[color] } : undefined}
             >
