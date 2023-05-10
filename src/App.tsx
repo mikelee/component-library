@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.scss'
+
+import Button from './components/button/button.component'
+import Card from './components/card/card.component'
+import Carousel from './components/carousel/carousel.component'
+import ColorTheme from './components/color-theme/color-theme.component'
+
+const cards = [
+    <Card frontTitle='Card One' colorFront='primary' colorBack='secondary' />,
+    <Card frontTitle='Card Two' colorFront='primary' colorBack='secondary' />,
+    <Card frontTitle='Card Three' colorFront='primary' colorBack='secondary' />,
+    <Card frontTitle='Card Four' colorFront='primary' colorBack='secondary' />,
+    <Card frontTitle='Card Five' colorFront='primary' colorBack='secondary' />
+]
+
+const colors = {
+    primary: '#0F7173',
+    secondary: '#EF8354',
+    tertiary: '#EE4B6A'
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    return (
+        <ColorTheme colors={colors}>
+            <div className="App">
+                <section className='component-section'>
+                    <h1>Button</h1>
+                    <Button onClick={() => console.log('HI!')} color='tertiary' size='large'>Click Here</Button>
+                </section>
+                <section className='component-section'>
+                    <h1>Card</h1>
+                    <Card
+                        frontTitle='Front Title'
+                        frontText='This is in the front. How are you doing! Text goes here.'
+                        backTitle='Back Title'
+                        backText='This is in the back. More text goes here.'
+                        colorFront='primary'
+                        colorBack='secondary'
+                    />
+                </section>
+                <section className='component-section'>
+                    <h1>Carousel</h1>
+                    <h2>Carousel: One Item</h2>
+                    <Carousel items={cards} color='tertiary' itemPadding={64} />
+                    <h2>Carousel: Multiple Items</h2>
+                    <Carousel items={cards} prev next color='tertiary' />
+                </section>
+            </div>
+        </ColorTheme>
+    )
 }
 
 export default App
