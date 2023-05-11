@@ -1,6 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { config } from 'react-transition-group'
 import Carousel from './carousel.component';
+
+// Disable the wait times for the transitions. All react-transition-group transitions are instantaneous
+config.disabled = true
 
 const items: React.ReactElement[] = [
     <div key={1}>Item One</div>,
@@ -34,7 +38,7 @@ describe('Carousel tests without prev and next items', () => {
         
         const text2 = items[1].props.children;
         const secondItem = screen.getByText(text2);
-        
+
         expect(firstItem).not.toBeInTheDocument();
         expect(secondItem).toBeInTheDocument();
     });
