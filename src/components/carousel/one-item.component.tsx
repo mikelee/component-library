@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { RefObject, useLayoutEffect, useRef, useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 interface Props {
@@ -11,6 +11,8 @@ interface Props {
 const OneItem: React.FC<Props> = ({ items, currentIndex, direction, itemPadding }) => {
     const [itemWidth, setItemWidth] = useState(0);
     const [itemHeight, setItemHeight] = useState(0);
+
+    const itemRefs = useRef<RefObject<any>[]>(items.map(() => React.createRef()));
 
     useLayoutEffect(() => {
         const width = document?.getElementById('item-cur')?.offsetWidth;
@@ -32,8 +34,8 @@ const OneItem: React.FC<Props> = ({ items, currentIndex, direction, itemPadding 
             style={{ width: itemWidth, height: itemHeight, padding: itemPadding ? itemPadding : 0 }}
             childFactory={childFactory(direction)}
         >
-            <CSSTransition key={currentIndex} timeout={300} classNames={`from-${direction}`}>
-                <div className='item one-item' style={{zIndex: 100 + currentIndex}}>
+            <CSSTransition key={currentIndex} timeout={300} nodeRef={itemRefs.current[currentIndex]} classNames={`from-${direction}`}>
+                <div className='item one-item' ref={itemRefs.current[currentIndex]} style={{zIndex: 100 + currentIndex}}>
                     {items[currentIndex]}
                 </div>
             </CSSTransition>
