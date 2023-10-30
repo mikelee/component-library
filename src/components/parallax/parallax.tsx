@@ -32,9 +32,14 @@ const Parallax: React.FC<Props> = ({ backgroundPath, children, speed, background
     // calculates how much larger to make background and whether to offset background above or below Parallax
     useEffect(() => {
         if (parallaxRef.current) {
-            const { height } = parallaxRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const { height: parallaxHeight } = parallaxRef.current.getBoundingClientRect();
 
-            const translateTotal = height * speed;
+            // the height of the scroll area that will cause the background to translate
+            // this is from when the top of Parallax enters at the bottom of the window to when the bottom of Parallax exits at the top of the window
+            const parallaxWindowHeight = parallaxHeight + windowHeight;
+
+            const translateTotal = parallaxWindowHeight * speed;
 
             if (speed >= 0) {
                 setTop(-translateTotal);
@@ -73,7 +78,9 @@ const Parallax: React.FC<Props> = ({ backgroundPath, children, speed, background
             // This way, parallaxWindowTop === scrollPosition when Parallax enters from the bottom of the screen 
             const parallaxWindowTop = parallaxTop + scrollY - windowHeight;
 
-            const translateTotal = parallaxHeight * speed;
+            const parallaxWindowHeight = parallaxHeight + windowHeight;
+
+            const translateTotal = parallaxWindowHeight * speed;
             
             // relative to parallaxWindowTop
             const scrollPositionRelative = scrollPosition - parallaxWindowTop;
