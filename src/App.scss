@@ -17,4 +17,18 @@
             border-bottom: none;
         }
     }
+
+    .parallax-section {
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            font-weight: 700;
+            text-shadow: 0 0 16px black, 0 0 16px black, 0 0 16px black;
+
+            p {
+                font-size: 1.5rem;
+            }
+        }
+    }
 }

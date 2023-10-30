@@ -4,6 +4,7 @@ import Button from './components/button/button.component'
 import Card from './components/card/card.component'
 import Carousel from './components/carousel/carousel.component'
 import ColorTheme from './components/color-theme/color-theme.component'
+import Parallax from './components/parallax/parallax'
 
 const cards = [
     <Card frontTitle='Card One' colorFront='primary' colorBack='secondary' />,
@@ -45,6 +46,22 @@ function App() {
                     <h2>Carousel: Multiple Items</h2>
                     <Carousel items={cards} prev next color='tertiary' />
                 </section>
+                <section className='parallax-section'>
+                    <Parallax
+                        backgroundPath='https://images.unsplash.com/photo-1695037150815-bad631c344b3?auto=format&fit=crop&q=80&w=3175&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                        speed={.5}
+                    >
+                        <div className='content'>
+                            <h1>Parallax Section</h1>
+                            <p>This text should move at a different speed than the background</p>
+                            <p>This is more text</p>
+                            <p>Hello there!</p>
+                            <p>Still more.</p>
+                            <p>The end!</p>
+                        </div>
+                    </Parallax>
+                </section>
+                <section style={{ width: '100%', height: '1000px' }}></section> { /* This section is here so there is more room to scroll to display the whole parallax effect in .parallax-section */}
             </div>
         </ColorTheme>
     )
