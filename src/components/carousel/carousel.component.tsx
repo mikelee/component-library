@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ColorThemeContext } from '../color-theme/color-theme.component';
 
 import './carousel.styles.scss';
-import { ReactComponent as ArrowIcon} from '../../assets/arrow_right.svg';
+import ArrowIcon from '../../assets/arrow_right.svg';
 
 import MultipleItems from './multiple-items.component';
 import OneItem from './one-item.component';
