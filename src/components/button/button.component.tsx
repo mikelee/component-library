@@ -10,7 +10,7 @@ interface Props {
     size?: 'small' | 'medium' | 'large'
 }
 
-const Button: React.FC<Props> = ({ color, children, size, onClick }) => {
+const Button: React.FC<Props> = ({ color, children, size='medium', onClick }) => {
     const colorTheme = useContext(ColorThemeContext)
     
     return (
@@ -22,10 +22,6 @@ const Button: React.FC<Props> = ({ color, children, size, onClick }) => {
             {children}
         </button>
     );
-}
-
-Button.defaultProps = {
-    size: 'medium'
 }
 
 export default Button;
